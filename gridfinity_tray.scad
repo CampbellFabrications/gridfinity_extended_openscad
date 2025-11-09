@@ -4,6 +4,18 @@ include <modules/gridfinity_constants.scad>
 include <modules/functions_general.scad>
 include <modules/module_gridfinity_cup_base.scad>
 
+/*
+ Spools are 2.54 per grid cell
+ based on a 42mm cell size and a 16.5mm spool height
+ 
+*/
+translate([0,0,40]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+
+/* segoi UI text for labels */
+module spool() {
+}
+
+
 /*<!!start gridfinity_tray!!>*/
 /* [Tray] */
 tray_corner_radius = 2;
@@ -11,7 +23,7 @@ tray_corner_radius = 2;
 //Height above the base height
 tray_zpos = 0;
 tray_magnet_radius = 5;
-tray_magnet_thickness = 5;
+tray_magnet_thickness = 3;
 tray_spacing = 2; //0.1
 tray_vertical_compartments = 1;
 tray_horizontal_compartments = 1;
@@ -25,7 +37,7 @@ dimensions of the tray cutout, a string with comma separated values, and pipe (|
  - example "0,0,2,1|2,0,2,1,2,5"
 */
 //[[xpos,ypos,xsize,ysize,radius,depth]]. xpos, ypos, the x/y position in gridfinity units.xsize, ysize. the x/y size in gridfinity units. radius, [optional] corner radius in mm.depth, [optional] depth in mm\nexample "0,0,2,1|2,0,2,1,2,5"
-tray_custom_compartments = "0, 0, 0.5, 3, 2, 6|0.5, 0, 0.5, 3,2, 6|1, 0, 3, 1.5|1, 1.5, 3, 1.5";
+tray_custom_compartments = "";
 
 // Debug, Color Compartments
 tray_color_compartments = false;
@@ -37,17 +49,17 @@ tray_highlight_compartments = false;
 /*<!!start gridfinity_basic_cup!!>*/
 /* [General Cup] */
 // X dimension. grid units (multiples of 42mm) or mm.
-width = [4, 0]; //0.5
+width = [7, 0]; //0.5
 // Y dimension. grid units (multiples of 42mm) or mm.
-depth = [3, 0]; //0.5
+depth = [2, 0]; //0.5
 // Z dimension excluding. grid units (multiples of 7mm) or mm.
-height = [3, 0]; //0.1
+height = [5, 0]; //0.1
 // Fill in solid block (overrides all following options)
 filled_in = true; 
 // Wall thickness of outer walls. default, height < 8 0.95, height < 16 1.2, height > 16 1.6 (Zack's design is 0.95 mm)
 wall_thickness = 0;  // .01
 // Remove some or all of lip
-position = "center"; //[default,center,zero]
+position = "default"; //[default,center,zero]
 //under size the bin top by this amount to allow for better stacking
 headroom = 0.8; // 0.1
 
@@ -111,7 +123,7 @@ flat_base = "off";//[off,gridfinity,rounded]
 spacer = false;
 
 /* [Label] */
-label_style = "disabled"; //[disabled: no label, normal:normal, gflabel:gflabel basic label, pred:pred - labels by pred, cullenect:Cullenect click labels V2,  cullenect_legacy:Cullenect click labels v1]
+label_style = "gflabel"; //[disabled: no label, normal:normal, gflabel:gflabel basic label, pred:pred - labels by pred, cullenect:Cullenect click labels V2,  cullenect_legacy:Cullenect click labels v1]
 // Include overhang for labeling (and specify left/right/center justification)
 label_position = "left"; // [left, right, center, leftchamber, rightchamber, centerchamber]
 // Width, Depth, Height, Radius. Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4. 

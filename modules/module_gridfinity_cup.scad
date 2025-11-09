@@ -184,7 +184,7 @@ default_extension_tab_size= [10,0,0,0];
 // Add bin size to bin bottom
 default_text_1 = false;
 // Size of text, in mm
-default_text_size = 0; // 0.1
+default_text_size = 0.1; // 0.1
 // Depth of text, in mm
 default_text_depth = 0.3; // 0.01
 // Offset of text , in mm
@@ -198,11 +198,12 @@ default_text_2_text = "Gridfinity";
 
 module end_of_customizer_opts() {}
 
+default_help = "debug"; //["off","info","debug","trace"]
 /*
 //[debug] 
 default_cutx = 0;//0.01
 default_cuty = 0;//0.01
-default_help = "info"; //["off","info","debug","trace"]
+
 
 set_environment(//execution point
   width = default_width,

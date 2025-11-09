@@ -11,14 +11,54 @@ include <modules/gridfinity_constants.scad>
 use <modules/module_gridfinity_cup.scad>
 use <modules/module_gridfinity_block.scad>
 
+
+elegoo_pla = ["TL6400","TL6401","TL6402","TL6403","TL6404","TL6405","TL6406","TL6407","TL6408","TL6409","TL6410","TL6411","TL6412","TL6413","TL6414", "TL6415","TL6416","TL6417"];
+elegoo_pla_plus = ["TL6457","TL6458","TL6459","TL6460","TL6461","TL6462","TL6463","TL6464","TL6465","TL6466","TL6467","TL6468","TL6469","TL6470","TL6471", "TL6472"];
+elegoo_pla_cf = ["TL6434"];
+elegoo_pla_silk = ["TL6418","TL6419","TL6420","TL6421","TL6422","TL6423","TL6424","TL6425","TL6426","TL6427","TL6428","TL6429","TL6430"];
+elegoo_pla_glitter = ["TL6431","TL6432","TL6433"];
+elegoo_asa = ["TL6522","TL6523"];
+elegoo_pla_matte = ["TL6483", "TL6484","TL6485","TL6486","TL6487","TL6488","TL6489","TL6490","TL6491","TL6492","TL6493","TL6494"];
+elegoo_tpu = ["TL6524","TL6525","TL6526","TL6527","TL6528","TL6529","TL6530"];
+elegoo_petg_pro = ["TL6495","TL6496","TL6497","TL6498","TL6499","TL6500","TL6501","TL6502","TL6503","TL6504","TL6505","TL6506","TL6507"];
+elegoo_petg_rapid = ["TL6509","TL6510","TL6511","TL6512","TL6513","TL6514","TL6515","TL6516","TL6517","TL6518","TL6519","TL6520"];
+elegoo_pla_rapid_plus = ["TL6435","TL6436","TL6437","TL6438","TL6439","TL6440","TL6441","TL6442","TL6443","TL6444","TL6445"];
+
+flashforge_pla = ["TL4260","TL4261","TL4262","TL4263","TL4264","TL4265","TL4266","TL4267"];
+
+sunlu_pla_plus_2 = ["TL6216", "TL6217", "TL6218","TL6219","TL6220","TL6221","TL6222","TL6223","TL6224","TL6225","TL6226","TL6227","TL6228","TL6229","TL6230","TL6231","TL6232","TL6233","TL6234","TL6235"];
+sunlu_rapid_marble = ["TL6200","TL6201","TL6202","TL6203","TL6204","TL6205"];
+sunlu_pla_silk_s = ["TL6236","TL6237","TL6238","TL6239","TL6240","TL6241","TL6242","TL6243","TL6244","TL6245"];
+sunlu_pla_silk = ["TL6037","TL6038","TL6039","TL6040","TL6041"];
+sunlu_pla_silk_tri = ["TL6259","TL6260","TL6261","TL6262","TL6263"];
+sunlu_pvb = ["TL6135","TL6136","TL6137","TL6138","TL6139","TL6140","TL6141"];
+sunlu_asa = ["TL6100","TL6101","TL6102","TL6103","TL6104","TL6105"];
+sunlu_pla_wood = ["TL6154","TL6155","TL6156","TL6157"];
+sunlu_pla_dual = ["TL6246","TL6247","TL6248","TL6249","TL6250","TL6251","TL6252","TL6253"];
+sunlu_pla_glow = ["TL6031","TL6032","TL6033","TL6034","TL6035","TL6036"];
+sunlu_pla_rainbow = ["TL6254","TL6044","TL6255","TL6256","TL6257","TL6258"];
+sunlu_cf = ["TL6111","TL6020","TL6030","TL6128"];
+
+sunlu_abs_rapid = ["TL6000","TL6022","TL6001","TL6023","TL6002","TL6003","TL6004","TL6005","TL6006","TL6007"];
+sunlu_pc_abs = ["TL6010","TL6011"];
+sunlu_abs_fr = ["TL6008","TL6009"];
+
+
+// spool height 16, spool diameter 40
+translate([-(16.2*len(elegoo_pla))/2,0,0])
+for(i = [0:len(elegoo_pla)]) {
+translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+
+
 /*<!!start gridfinity_basic_cup!!>*/
 /* [General Cup] */
 // X dimension. grid units (multiples of 42mm) or mm.
-width = [2, 0]; //0.1
+width = [8, 0]; //0.1
 // Y dimension. grid units (multiples of 42mm) or mm.
-depth = [1, 0]; //0.1
+depth = [2, 0]; //0.1
 // Z dimension excluding. grid units (multiples of 7mm) or mm.
-height = [3, 0]; //0.1
+height = [4, 0]; //0.1
 // Fill in solid block (overrides all following options)
 filled_in = "disabled"; //[disabled, enabled, enabledfilllip:"Fill cup and lip"]
 // Wall thickness of outer walls. default, height < 8 0.95, height < 16 1.2, height > 16 1.6 (Zack's design is 0.95 mm)
@@ -72,11 +112,11 @@ horizontal_separator_config = "10.5|21|42|50|60";
 
 /* [Base] */
 // Enable magnets
-enable_magnets = false;
+enable_magnets = true;
 // Enable screws
 enable_screws = false;
 //size of magnet, diameter and height. Zack's original used 6.5 and 2.4
-magnet_size = [6.5, 2.4];  // .1
+magnet_size = [10, 3];  // .1
 //create relief for magnet removal
 magnet_easy_release = "auto";//["off","auto","inner","outer"] 
 // raise the magnet void inside the part for print-in-magnets
@@ -90,7 +130,7 @@ hole_overhang_remedy = 2;
 //Only add attachments (magnets and screw) to box corners (prints faster).
 box_corner_attachments_only = true;
 // Minimum thickness above cutouts in base (Zack's design is effectively 1.2)
-floor_thickness = 0.7;
+floor_thickness = 1.0;
 cavity_floor_radius = -1;// .1
 // Efficient floor option saves material and time, but the internal floor is not flat
 efficient_floor = "off";//[off,on,rounded,smooth]
@@ -113,11 +153,11 @@ align_grid_x = "near";//[near, far]
 align_grid_y = "near";//[near, far]
 
 /* [Label] */
-label_style = "disabled"; //[disabled: no label, normal:normal, gflabel:gflabel basic label, pred:pred - labels by pred, cullenect:Cullenect click labels V2,  cullenect_legacy:Cullenect click labels v1]
+label_style = "normal"; //[disabled: no label, normal:normal, gflabel:gflabel basic label, pred:pred - labels by pred, cullenect:Cullenect click labels V2,  cullenect_legacy:Cullenect click labels v1]
 // Include overhang for labeling (and specify left/right/center justification)
 label_position = "left"; // [left, right, center, leftchamber, rightchamber, centerchamber]
 // Width, Depth, Height, Radius. Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4. 
-label_size = [0,14,0,0.6]; // 0.01
+label_size = [0,20,0,0.6]; // 0.01
 // Size in mm of relief where appropriate. Width, depth, height, radius
 label_relief = [0,0,0,0.6]; // 0.1
 // wall to enable on, front, back, left, right. 0: disabled; 1: enabled;
@@ -217,11 +257,11 @@ floorpattern_pattern_brick_weight = 5;
 floorpattern_pattern_quality = 0.4;//0.1:0.1:2
 
 /* [Wall Cutout] */
-wallcutout_vertical ="disabled"; //[disabled, enabled, inneronly, wallsonly, frontonly, backonly]
+wallcutout_vertical ="frontonly"; //[disabled, enabled, inneronly, wallsonly, frontonly, backonly]
 // wallcoutout position -0.5: disabled; Positive: GF units; Negative: ratio length/abs(value)
 wallcutout_vertical_position=[-2,-0.5,-0.5,-0.5];  //0.01
 //default will be binwidth/2
-wallcutout_vertical_width=0;
+wallcutout_vertical_width=310;
 wallcutout_vertical_angle=70;
 //default will be binHeight. 0: radius, -1 floor, Positive: depth from top; Negative: ratio height/abs(value)
 wallcutout_vertical_height=0; //0.1
