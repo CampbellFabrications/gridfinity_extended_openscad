@@ -43,12 +43,79 @@ sunlu_abs_rapid = ["TL6000","TL6022","TL6001","TL6023","TL6002","TL6003","TL6004
 sunlu_pc_abs = ["TL6010","TL6011"];
 sunlu_abs_fr = ["TL6008","TL6009"];
 
-
+spool_width = 16;
+spool_diameter = 42;
 // spool height 16, spool diameter 40
-translate([-(16.2*len(elegoo_pla))/2,0,0])
-for(i = [0:len(elegoo_pla)]) {
-translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+
+
+
+
+color("Silver") translate([-(16.2*(len(elegoo_pla)-1))/2,spool_diameter*1,0])
+for(i = [0:len(elegoo_pla)-1]) {
+	if(i == 0) {
+	translate([0,0,30]) text(text="Elegoo PLA");
+	}
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
 }
+
+color("Silver") translate([-(16.2*(len(elegoo_pla_plus)-1))/2,spool_diameter*2,0])
+for(i = [0:len(elegoo_pla_plus)-1]) {
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+
+color("Silver") translate([-(16.2*(len(elegoo_pla_silk)-1))/2,spool_diameter*3,0])
+for(i = [0:len(elegoo_pla_silk)-1]) {
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+
+color("Green") translate([-16.2 * 8.5  - 16.2/2,-spool_diameter*2,0])
+for(i = [0:len(elegoo_pla_glitter)-1]) {
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+
+color("Green") translate([-16.2 * 5 - 16.2/2,-spool_diameter*2,0])
+for(i = [0:len(elegoo_asa)-1]) {
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+
+color("Green") translate([-16.2 * 2.5 - 16.2/2 ,-spool_diameter*2,0])
+for(i = [0:len(elegoo_pla_cf)-1]) {
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+
+color("Green") translate([-16.2 * 1 - 16.2/2,-spool_diameter*2,0])
+for(i = [0:len(elegoo_petg_rapid)-1]) {
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+
+
+color("Green") translate([-16.2*9 ,-spool_diameter*3,0])
+for(i = [0:len(elegoo_pla_rapid_plus)-1]) {
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+color("Green") translate([16.2 * 3 ,-spool_diameter*3,0])
+for(i = [0:len(elegoo_tpu)-1]) {
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+
+
+translate([-(16.2*(len(elegoo_pla_matte)-1))/2,-spool_diameter*1,0])
+for(i = [0:len(elegoo_pla_matte)-1]) {
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+
+
+
+translate([-(16.2*(len(elegoo_petg_pro)-1))/2,-spool_diameter*0,0])
+for(i = [0:len(elegoo_petg_pro)-1]) {
+	translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+}
+
+
+
+
+
+
 
 
 /*<!!start gridfinity_basic_cup!!>*/
@@ -56,9 +123,9 @@ translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_ex
 // X dimension. grid units (multiples of 42mm) or mm.
 width = [8, 0]; //0.1
 // Y dimension. grid units (multiples of 42mm) or mm.
-depth = [2, 0]; //0.1
+depth = [8, 0]; //0.1
 // Z dimension excluding. grid units (multiples of 7mm) or mm.
-height = [4, 0]; //0.1
+height = [8, 0]; //0.1
 // Fill in solid block (overrides all following options)
 filled_in = "disabled"; //[disabled, enabled, enabledfilllip:"Fill cup and lip"]
 // Wall thickness of outer walls. default, height < 8 0.95, height < 16 1.2, height > 16 1.6 (Zack's design is 0.95 mm)
@@ -281,25 +348,25 @@ extension_x_enabled = "disabled"; //[disabled, front, back]
 extension_x_position = 0.5; 
 extension_y_enabled = "disabled"; //[disabled, front, back]
 extension_y_position = 0.5; 
-extension_tabs_enabled = true;
+extension_tabs_enabled = false;
 //Tab size, height, width, thickness, style. width default is height, thickness default is 1.4, style {0,1,2}.
 extension_tab_size= [10,0,0,0];
 
 /* [Bottom Text] */
 // Add bin size to bin bottom
-text_1 = false;
+text_1 = true;
 // Font Size of text, in mm (0 will auto size)
 text_size = 0; // 0.1
 // Depth of text, in mm
 text_depth = 0.3; // 0.01
 // Offset of text , in mm
-text_offset = [0, 0]; // 0.1
+text_offset = [0, 10]; // 0.1
 // Font to use
 text_font = "Aldo";  // [Aldo, B612, "Open Sans", Ubuntu]
 // Add free-form text line to bin bottom (printing date, serial, etc)
-text_2 = false;
+text_2 = true;
 // Actual text to add
-text_2_text = "Gridfinity Extended";
+text_2_text = "4721";
 
 /* [debug] */
 // Debug slice
