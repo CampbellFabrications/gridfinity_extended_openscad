@@ -24,121 +24,115 @@ elegoo_petg_pro = ["TL6495","TL6496","TL6497","TL6498","TL6499","TL6500","TL6501
 elegoo_petg_rapid = ["TL6509","TL6510","TL6511","TL6512","TL6513","TL6514","TL6515","TL6516","TL6517","TL6518","TL6519","TL6520"];
 elegoo_pla_rapid_plus = ["TL6435","TL6436","TL6437","TL6438","TL6439","TL6440","TL6441","TL6442","TL6443","TL6444","TL6445"];
 
-flashforge_pla = ["TL4260","TL4261","TL4262","TL4263","TL4264","TL4265","TL4266","TL4267"];
-
-sunlu_pla_plus_2 = ["TL6216", "TL6217", "TL6218","TL6219","TL6220","TL6221","TL6222","TL6223","TL6224","TL6225","TL6226","TL6227","TL6228","TL6229","TL6230","TL6231","TL6232","TL6233","TL6234","TL6235"];
-sunlu_rapid_marble = ["TL6200","TL6201","TL6202","TL6203","TL6204","TL6205"];
-sunlu_pla_silk_s = ["TL6236","TL6237","TL6238","TL6239","TL6240","TL6241","TL6242","TL6243","TL6244","TL6245"];
-sunlu_pla_silk = ["TL6037","TL6038","TL6039","TL6040","TL6041"];
-sunlu_pla_silk_tri = ["TL6259","TL6260","TL6261","TL6262","TL6263"];
-sunlu_pvb = ["TL6135","TL6136","TL6137","TL6138","TL6139","TL6140","TL6141"];
-sunlu_asa = ["TL6100","TL6101","TL6102","TL6103","TL6104","TL6105"];
-sunlu_pla_wood = ["TL6154","TL6155","TL6156","TL6157"];
-sunlu_pla_dual = ["TL6246","TL6247","TL6248","TL6249","TL6250","TL6251","TL6252","TL6253"];
-sunlu_pla_glow = ["TL6031","TL6032","TL6033","TL6034","TL6035","TL6036"];
-sunlu_pla_rainbow = ["TL6254","TL6044","TL6255","TL6256","TL6257","TL6258"];
-sunlu_cf = ["TL6111","TL6020","TL6030","TL6128"];
-
-sunlu_abs_rapid = ["TL6000","TL6022","TL6001","TL6023","TL6002","TL6003","TL6004","TL6005","TL6006","TL6007"];
-sunlu_pc_abs = ["TL6010","TL6011"];
-sunlu_abs_fr = ["TL6008","TL6009"];
 
 spool_width = 16;
-spool_diameter = 42;
+spool_diameter = 40;
 // spool height 16, spool diameter 40
+module spool() {
+	rim_width = 2;
+	rim_diameter = 40;
+	spool_inner_height = 12;
+	spool_inner_diameter = 36;
+	cylinder(h = rim_width, d = rim_diameter);
+	translate([0,0,rim_width]) cylinder(h = spool_inner_height, d = spool_inner_diameter);
+	translate([0,0,rim_width + spool_inner_height]) cylinder(h = rim_width, d = rim_diameter);
+}
 
-
-
-translate([-16.2 * 8.5 - 16.2/2,-spool_diameter*3,0])
+//spool();
+//translate([-15,0,0])
+//group() {
+translate([-(spool_width+0.4)*(len(elegoo_pla))/2,0,0])
 for(i = [0:len(elegoo_pla)-1]) {
 	if(i == 0) {
 	color("White") translate([0,0,55]) text(text="PLA");
 	}
-	color("Red") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
+	color("Red") translate([(spool_width+0.4)*i,-10,30]) rotate([0,90,0]) spool();
 }
+color("Orange") translate([-(spool_width+0.4)*(len(elegoo_pla))/2,-spool_diameter,30]) cube([(spool_width+0.4)*(len(elegoo_pla)),spool_diameter,spool_diameter]);
 
-translate([-16.2 * 8.5 - 16.2/2,-spool_diameter*2,0])
-for(i = [0:len(elegoo_pla_plus)-1]) {
-	if(i == 0) {
-		color("White") translate([0,0,55]) text(text="PLA-Plus");
-	}
-	color("Red") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
-}
-
-translate([-16.2 * 8.5 - 16.2/2 ,-spool_diameter*1,0])
-for(i = [0:len(elegoo_pla_rapid_plus)-1]) {
-	if(i == 0) {
-		color("White") translate([0,0,55]) text(text="PLA-Rapid-Plus");
-	}
-	color("Red") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
-}
-
-translate([-16.2 * 8.5  - 16.2/2,spool_diameter*2,0])
-for(i = [0:len(elegoo_pla_glitter)-1]) {
-	if(i == 0) {
-		color("White") translate([-10,-10,55]) text(text="PLA-Glitter");
-	}
-	color("Pink") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
-}
-
-translate([-16.2 * 8.5 - 16.2/2,spool_diameter*1,0])
-for(i = [0:len(elegoo_pla_matte)-1]) {
-	if(i == 0) {
-		color("White") translate([0,0,55]) text(text="PLA-Matte");
-	}
-	color("Pink") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
-}
-
-translate([-16.2 * 8.5 - 16.2/2,spool_diameter*0,0])
-for(i = [0:len(elegoo_pla_silk)-1]) {
-	if(i == 0) {
-		color("White") translate([0,0,55]) text(text="PLA-Silk");
-	}
-	color("Pink") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
-}
-
-
-translate([16.2 * 2.5 - 16.2/2,spool_diameter*2,0])
-for(i = [0:len(elegoo_asa)-1]) {
-	if(i == 0) {
-		color("White") translate([-10,-10,55]) text(text="ASA");
-	}
-	color("Black") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
-}
-
-translate([16.2 * 3.5 - 16.2/2 ,spool_diameter*3,0])
-for(i = [0:len(elegoo_pla_cf)-1]) {
-	if(i == 0) {
-		color("White") translate([-25,-20,55]) text(text="PLA-CF");
-	}
-	color("Black") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
-}
-
-translate([-16.2 * 5 - 16.2/2 ,spool_diameter*2,0])
-for(i = [0:len(elegoo_tpu)-1]) {
-	if(i == 0) {
-		color("White") translate([20,-10,55]) text(text="TPU");
-	}
-	color("Black") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
-}
-
-
-rotate([0,0,-90]) translate([-16.2 * 7.5 - 16.2/2,spool_diameter*2.5,0])
-for(i = [0:len(elegoo_petg_rapid)-1]) {
-	if(i == 0) {
-		color("White") translate([0,0,55]) text(text="PETG-Rapid");
-	}
-	color("Green") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
-}
-
-
-rotate([0,0,-90]) translate([-16.2 * 7.5 - 16.2/2,spool_diameter*3.5,0])
-for(i = [0:len(elegoo_petg_pro)-1]) {
-	if(i == 0) {
-		color("White") translate([0,0,55]) text(text="PETG-Pro");
-	}
-	color("Green") translate([16.2*i,-10,30]) rotate([0,90,0]) import("C:/home/Github/gridfinity_extended_openscad/swatch.stl");
-}
+//translate([-spool_width * 8.5 - spool_width/2,-spool_diameter*2,0])
+//for(i = [0:len(elegoo_pla_plus)-1]) {
+//	if(i == 0) {
+//		color("White") translate([0,0,55]) text(text="PLA-Plus");
+//	}
+//	color("Red") translate([spool_width*i,-10,30]) rotate([0,90,0]) spool();
+//}
+//
+//translate([-spool_width * 8.5 - spool_width/2 ,-spool_diameter*1,0])
+//for(i = [0:len(elegoo_pla_rapid_plus)-1]) {
+//	if(i == 0) {
+//		color("White") translate([0,0,55]) text(text="PLA-Rapid-Plus");
+//	}
+//	color("Red") translate([spool_width*i,-10,30]) rotate([0,90,0]) spool();
+//}
+//
+//translate([-spool_width * 8.5  - spool_width/2,spool_diameter*2,0])
+//for(i = [0:len(elegoo_pla_glitter)-1]) {
+//	if(i == 0) {
+//		color("White") translate([-10,-10,55]) text(text="PLA-Glitter");
+//	}
+//	color("Pink") translate([spool_width*i,-10,30]) rotate([0,90,0]) spool();
+//}
+//
+//translate([-spool_width * 8.5 - spool_width/2,spool_diameter*1,0])
+//for(i = [0:len(elegoo_pla_matte)-1]) {
+//	if(i == 0) {
+//		color("White") translate([0,0,55]) text(text="PLA-Matte");
+//	}
+//	color("Pink") translate([spool_width*i,-10,30]) rotate([0,90,0]) spool();
+//}
+//
+//translate([-spool_width * 8.5 - spool_width/2,spool_diameter*0,0])
+//for(i = [0:len(elegoo_pla_silk)-1]) {
+//	if(i == 0) {
+//		color("White") translate([0,0,55]) text(text="PLA-Silk");
+//	}
+//	color("Pink") translate([spool_width*i,-10,30]) rotate([0,90,0]) spool();
+//}
+//
+//
+//translate([spool_width * 2.5 - spool_width/2,spool_diameter*2,0])
+//for(i = [0:len(elegoo_asa)-1]) {
+//	if(i == 0) {
+//		color("White") translate([-10,-10,55]) text(text="ASA");
+//	}
+//	color("Black") translate([spool_width*i,-10,30]) rotate([0,90,0]) spool();
+//}
+//
+//translate([spool_width * 3.5 - spool_width/2 ,spool_diameter*3,0])
+//for(i = [0:len(elegoo_pla_cf)-1]) {
+//	if(i == 0) {
+//		color("White") translate([-25,-20,55]) text(text="PLA-CF");
+//	}
+//	color("Black") translate([spool_width*i,-10,30]) rotate([0,90,0]) spool();
+//}
+//
+//translate([-spool_width * 5 - spool_width/2 ,spool_diameter*2,0])
+//for(i = [0:len(elegoo_tpu)-1]) {
+//	if(i == 0) {
+//		color("White") translate([20,-10,55]) text(text="TPU");
+//	}
+//	color("Black") translate([spool_width*i,-10,30]) rotate([0,90,0]) spool();
+//}
+//
+//
+//rotate([0,0,-90]) translate([-spool_width * 7.5 - spool_width/2,spool_diameter*2.5,0])
+//for(i = [0:len(elegoo_petg_rapid)-1]) {
+//	if(i == 0) {
+//		color("White") translate([0,0,55]) text(text="PETG-Rapid");
+//	}
+//	color("Green") translate([spool_width*i,-10,30]) rotate([0,90,0]) spool();
+//}
+//
+//
+//rotate([0,0,-90]) translate([-spool_width * 7.5 - spool_width/2,spool_diameter*3.5,0])
+//for(i = [0:len(elegoo_petg_pro)-1]) {
+//	if(i == 0) {
+//		color("White") translate([0,0,55]) text(text="PETG-Pro");
+//	}
+//	color("Green") translate([spool_width*i,-10,30]) rotate([0,90,0]) spool();
+//}
+//}
 
 
 
@@ -155,9 +149,9 @@ for(i = [0:len(elegoo_petg_pro)-1]) {
 // X dimension. grid units (multiples of 42mm) or mm.
 width = [8, 0]; //0.1
 // Y dimension. grid units (multiples of 42mm) or mm.
-depth = [8, 0]; //0.1
+depth = [1.5, 0]; //0.1
 // Z dimension excluding. grid units (multiples of 7mm) or mm.
-height = [8, 0]; //0.1
+height = [7, 0]; //0.1
 // Fill in solid block (overrides all following options)
 filled_in = "disabled"; //[disabled, enabled, enabledfilllip:"Fill cup and lip"]
 // Wall thickness of outer walls. default, height < 8 0.95, height < 16 1.2, height > 16 1.6 (Zack's design is 0.95 mm)
@@ -256,9 +250,9 @@ label_style = "normal"; //[disabled: no label, normal:normal, gflabel:gflabel ba
 // Include overhang for labeling (and specify left/right/center justification)
 label_position = "left"; // [left, right, center, leftchamber, rightchamber, centerchamber]
 // Width, Depth, Height, Radius. Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4. 
-label_size = [0,20,0,0.6]; // 0.01
+label_size = [10,25.4,30,0.6]; // 0.01
 // Size in mm of relief where appropriate. Width, depth, height, radius
-label_relief = [0,0,0,0.6]; // 0.1
+label_relief = [0,0,0,0.8]; // 0.1
 // wall to enable on, front, back, left, right. 0: disabled; 1: enabled;
 label_walls=[0,1,0,0];  //[0:1:1]
     
